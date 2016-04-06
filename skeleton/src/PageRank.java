@@ -57,10 +57,10 @@ public class PageRank {
             if(i%2 == 0) {
                 // Set up leftover and size
                 leftover=job.getCounters().findCounter(Counters.Amout).getValue();
-                size=job.getConters().findCounter(Counters.Count).getValue();
+                size=job.getCounters().findCounter(Counters.Count).getValue();
             } else {
                 leftover=job.getCounters().findCounter(Counters.Amout).getValue();
-                size=job.getConters().findCounter(Counters.Count).getValue();
+                size=job.getCounters().findCounter(Counters.Count).getValue();
                 // Set up leftover and size
             }
                 
