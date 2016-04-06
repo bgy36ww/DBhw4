@@ -11,7 +11,7 @@ import org.apache.hadoop.util.*;
 public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDouble> {
     public void map(IntWritable key, Node value, Context context) throws IOException, InterruptedException {
         //emit current node for reducer to use
-        context.write(key, NodeOrDouble(value));
+        context.write(key, new NodeOrDouble(value));
         //increment the count of the total nodes
         context.getCounter("Counters", "Count").increment(1);
         //check if there is any outgoing path for this node. In other words, is this a leftovernode
