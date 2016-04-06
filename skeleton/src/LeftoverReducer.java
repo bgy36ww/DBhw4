@@ -13,7 +13,7 @@ public class LeftoverReducer extends Reducer<IntWritable, Node, IntWritable, Nod
     public void reduce(IntWritable nid, Iterable<Node> Ns, Context context) throws IOException, InterruptedException {
         //all the stuff is stored in counters
         //so first thing is to pull them out
-        Configuration config=context.getconfiguration();
+        Configuration config=context.getConfiguration();
         //pull size from config
         long size=Long.parseLong(config.get("size"));
         //pull leftover from config
