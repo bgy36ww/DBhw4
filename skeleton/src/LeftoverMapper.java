@@ -12,5 +12,6 @@ public class LeftoverMapper extends Mapper<IntWritable, Node, IntWritable, Node>
     public void map(IntWritable nid, Node N, Context context) throws IOException, InterruptedException {
         
         //Implement
+        context.write(nid,N);
     }
 }

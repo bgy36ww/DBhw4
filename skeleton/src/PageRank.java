@@ -56,7 +56,11 @@ public class PageRank {
             }
             if(i%2 == 0) {
                 // Set up leftover and size
+                leftover=job.getCounters().findCounter(Counters.Amout).getvalue();
+                size=job.getConters().findCounter(Counters.Count).getvalue();
             } else {
+                leftover=job.getCounters().findCounter(Counters.Amout).getvalue();
+                size=job.getConters().findCounter(Counters.Count).getvalue();
                 // Set up leftover and size
             }
                 
