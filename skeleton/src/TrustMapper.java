@@ -33,7 +33,7 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
                 //create output node id
                 IntWritable nid=new IntWritable((int)itr.next());
                 //emit nid,p
-                context.write(nid,NodeOrDouble(erank));
+                context.write(nid,new NodeOrDouble(erank));
             }}
         
         
