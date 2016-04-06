@@ -17,7 +17,7 @@ public class LeftoverReducer extends Reducer<IntWritable, Node, IntWritable, Nod
         //pull size from config
         long size=Long.parseLong(config.get("size"));
         //pull leftover from config
-        double leftover=Long.parseLong(config.get("leftover"))/100000000;
+        double leftover=Long.parseLong(config.get("leftover"))/100000000.00;
         //grab the current node
         Node n=Ns.iterator().next();
         //calculate the new pagerank
