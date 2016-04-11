@@ -1,0 +1,42 @@
+// Query 1.
+
+// Enter your answer here.
+MATCH (n:Character)-[:Can]->(m:Ability)-[:HasElement]->(p:Element)
+WHERE p.name = "Fire"
+RETURN DISTINCT n.name, m.name
+ORDER BY n.name, m.name;
+
+// Query 2.
+
+// Enter your answer here.
+MATCH (n:Character)
+WHERE NOT EXISTS((n)-[:Can]->(:Ability)-[:HasElement]->(:Element{name:"Physical"}))
+RETURN DISTINCT n.name
+ORDER BY n.name;
+
+// Query 3.
+
+// Enter your answer here.
+MATCH (n:Character)-[:Can]->(m:Ability)-[:HasElement]->(p:Element)
+WITH p, count(DISTINCT n) AS char_count
+ORDER BY char_count DESC, p.name
+LIMIT 1
+RETURN p.name;
+
+// Query 4.
+
+// Enter your answer here.
+MATCH (n1:Character)-[:Can]->(m1:Ability)-[:HasElement]->(p:Element)<-[:HasElement]-(m2:Ability)<-[:Can]-(n2:Character)
+WHERE n1.name < n2.name
+WITH n1, n2, count(DISTINCT p) AS element_count
+ORDER BY element_count DESC, n1.name, n2.name
+LIMIT 10
+RETURN n1.name, n2.name, element_count;
+
+// Query 5.
+
+// Enter your answer here.
+MATCH (n:Ability)-[:HasElement]->(m:Element)-[:EffectiveAgainst]->(p:Element)
+WITH p, n.name AS ability_name
+ORDER BY p.name, ability_name 
+RETURN p.name, collect(DISTINCT ability_name);
