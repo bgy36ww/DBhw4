@@ -26,17 +26,21 @@ RETURN p.name;
 // Query 4.
 
 // Enter your answer here.
-MATCH (n1:Character)-[:Can]->(m1:Ability)-[:HasElement]->(p:Element)<-[:HasElement]-(m2:Ability)<-[:Can]-(n2:Character)
+// Here we assume that each character has at least 1 ability, and that each ability has at least 1 element. See the followup discussions of Piazza thread @570.
+MATCH (n1:Character)-[:Can]->(m1:Ability)-[:HasElement]->(p1:Element), (n2:Character)-[:Can]->(m2:Ability)-[:HasElement]->(p2:Element)
 WHERE n1.name < n2.name
-WITH n1, n2, count(DISTINCT p) AS element_count
+WITH n1, n2, collect(DISTINCT p1) AS p1_element, collect(DISTINCT p2) AS p2_element
+MATCH (p:Element)
+WHERE p IN p1_element OR p IN p2_element
+RETURN n1.name, n2.name, count(DISTINCT p) AS element_count
 ORDER BY element_count DESC, n1.name, n2.name
-LIMIT 10
-RETURN n1.name, n2.name, element_count;
+LIMIT 10;
 
 // Query 5.
 
 // Enter your answer here.
-MATCH (n:Ability)-[:HasElement]->(m:Element)-[:EffectiveAgainst]->(p:Element)
+MATCH (p:Element)
+OPTIONAL MATCH (n:Ability)-[:HasElement]->(m:Element)-[:EffectiveAgainst]->(p:Element)
 WITH p, n.name AS ability_name
 ORDER BY p.name, ability_name 
 RETURN p.name, collect(DISTINCT ability_name);
